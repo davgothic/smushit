@@ -4,6 +4,7 @@
  * SmushIt - A PHP client for the Yahoo! Smush.it web service.
  *
  * @author   David Hancock <davgothic@gmail.com>
+ * @author   Elan Ruusamäe <glen@delfi.ee>
  * @license  http://davgothic.com/mit-license/
  * @link     http://github.com/davgothic/SmushIt
  */
@@ -24,6 +25,16 @@ class SmushIt {
 	 * @var  resource  cURL handle
 	 */
 	private $curl;
+
+	/**
+	 * @var  int	Time of last request
+	 */
+	private $request_time;
+
+	/**
+	 * @var  int	How often it is allowed to send requests. in microseconds
+	 */
+	public $request_interval = 1000000;
 
 	/**
 	 * Create a new SmushIt instance.
@@ -51,13 +62,23 @@ class SmushIt {
 	 * @return  object
 	 *
 	 *  src       = source location of the input image
-     *  src_size  = size of the source image in bytes
-     *  dest      = temporary location of the compressed image
-     *  dest_size = size of the compressed image in bytes
-     *  percent   = how much smaller the compressed image is
+	 *  src_size  = size of the source image in bytes
+	 *  dest      = temporary location of the compressed image
+	 *  dest_size = size of the compressed image in bytes
+	 *  percent   = how much smaller the compressed image is
 	 */
 	public function compress($image_location)
 	{
+		// Limit requests not often than request_interval microseconds
+		if (!empty($this->request_time)) {
+			$since_last = (microtime(1) - $this->request_time) * 1000000;
+			if ($since_last < $this->request_interval) {
+				// sleep it off
+				usleep($this->request_interval - $since_last);
+			}
+		}
+		$this->request_time = microtime(1);
+
 		$this->image_location = $image_location;
 
 		if (preg_match('/https?:\/\//', $this->image_location) == 1)
@@ -93,7 +114,7 @@ class SmushIt {
 	 */
 	private function smush_file()
 	{
-		if ( ! is_file($this->image_location) || ! is_readable($this->image_location))
+		if (!is_file($this->image_location) || ! is_readable($this->image_location))
 		{
 			throw new SmushItException('Could not read file', $this->image_location);
 		}
