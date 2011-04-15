@@ -4,7 +4,7 @@ SmushIt
 SmushIt is a PHP client for the popular Yahoo! image compression web service [Smush.it](http://www.smushit.com/ysmush.it/)
 
 Basic Usage
---------------------
+-----------
 
 	// Require the SmushIt source file
 	require_once 'smushit.php';
@@ -39,13 +39,22 @@ Basic Usage
 
 
 Requirements
---------------------
+------------
 
  - PHP 5.2+
  - PHP JSON extension
  - PHP cURL extension
 
+Changelog
+---------
+
+- 1.1
+  - Added request throttling (Thanks [Elan Ruusamäe](https://github.com/glensc))
+
+- 1.0
+  - Initial Public Release
+
 License
---------------------
+-------
 
 SmushIt is free and licensed under the [MIT license](http://davgothic.com/mit-license/)
