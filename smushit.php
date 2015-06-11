@@ -3,7 +3,7 @@
 /**
  * SmushIt - A PHP client for the Yahoo! Smush.it web service.
  *
- * @version    1.1
+ * @version    1.2
  * @author     David Hancock <davgothic@gmail.com>
  * @author     Elan Ruusamäe <glen@delfi.ee>
  * @copyright  (c) 2011 David Hancock
@@ -13,10 +13,10 @@
 class SmushIt {
 
 	// URL to the Smush.it web service.
-	const SMUSH_URL = 'http://www.smushit.com/ysmush.it/ws.php?';
+	const SMUSH_URL = 'http://www.resmush.it/ws.php?';
 
 	// User agent string to set for the request.
-	const USER_AGENT = 'ShushIt PHP Client/1.1 (+http://github.com/davgothic/SmushIt)';
+	const USER_AGENT = 'ShushIt PHP Client/1.2 (+http://github.com/davgothic/SmushIt)';
 
 	/**
 	 * @var  string  location of the image
