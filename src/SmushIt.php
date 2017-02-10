@@ -1,5 +1,9 @@
 <?php
 
+namespace DavGothic\SmushIt;
+
+use DavGothic\SmushIt\Exception\SmushItException;
+
 /**
  * SmushIt - A PHP client for the Yahoo! Smush.it web service.
  *
@@ -150,41 +154,6 @@ class SmushIt
         }
 
         return $result;
-    }
-
-}
-
-/**
- * SmushIt exception.
- */
-class SmushItException extends \Exception
-{
-
-    /**
-     * @var string Location of the image.
-     */
-    private $image;
-
-    /**
-     * Creates a new exception.
-     *
-     * @param string $message Error message.
-     * @param string $image   Location of the image.
-     */
-    public function __construct($message, $image)
-    {
-        $this->image = $image;
-        parent::__construct($message);
-    }
-
-    /**
-     * Get the location of the image.
-     *
-     * @return string
-     */
-    final public function getImage()
-    {
-        return $this->image;
     }
 
 }
