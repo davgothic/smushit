@@ -125,9 +125,11 @@ class SmushIt
             throw new SmushItException('Could not read image file', 500, $this->imageLocation);
         }
 
+        $file = new \CURLFile($this->imageLocation);
+
         curl_setopt($this->curl, CURLOPT_URL, self::SMUSH_URL);
         curl_setopt($this->curl, CURLOPT_POST, true);
-        curl_setopt($this->curl, CURLOPT_POSTFIELDS, array('files' => '@' . $this->imageLocation));
+        curl_setopt($this->curl, CURLOPT_POSTFIELDS, array('files' => $file));
         $jsonStr = curl_exec($this->curl);
 
         return $this->parseResponse($jsonStr);
