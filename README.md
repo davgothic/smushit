@@ -28,6 +28,13 @@ Basic Usage
     //     [generator] => reSmush.it rev.1.4.22.20170224
     // )
 
+Installation
+------------
+
+To install the most recent version via [composer](https://getcomposer.org/), run the following command:
+
+    composer require davgothic/smushit
+
 Requirements
 ------------
 
