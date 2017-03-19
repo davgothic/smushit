@@ -1,6 +1,7 @@
 {
   "name": "davgothic/smushit",
   "description": "SmushIt is a PHP client for the popular Yahoo! image compression web service Smush.it",
+  "homepage": "https://github.com/davgothic/smushit",
   "keywords": ["image-optimization", "smushit"],
   "minimum-stability": "dev",
   "license": "MIT",

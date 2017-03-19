@@ -7,7 +7,7 @@ use DavGothic\SmushIt\Exception\SmushItException;
 /**
  * SmushIt - A PHP client for the Yahoo! Smush.it web service.
  *
- * @version    1.3
+ * @version    2.0.0
  * @author     David Hancock <davgothic@gmail.com>
  * @author     Elan Ruusamäe <glen@delfi.ee>
  * @copyright  (c) 2011 David Hancock
@@ -21,7 +21,7 @@ class SmushIt
     const SMUSH_URL = 'http://api.resmush.it/ws.php?';
 
     // User agent string to set for the request.
-    const USER_AGENT = 'ShushIt PHP Client/1.3 (+http://github.com/davgothic/SmushIt)';
+    const USER_AGENT = 'ShushIt PHP Client/2.0.0 (+http://github.com/davgothic/SmushIt)';
 
     /**
      * @var string location of the image.
@@ -67,13 +67,14 @@ class SmushIt
     /**
      * @param string $imageLocation The location of the image.
      *
-     * @return object
+     * @return \stdClass
      *
      *  src       = Source location of the input image.
      *  src_size  = Size of the source image in bytes.
      *  dest      = Temporary location of the compressed image.
      *  dest_size = Size of the compressed image in bytes.
      *  percent   = How much smaller the compressed image is.
+     *  expires   = The date when the file will be deleted from the server
      */
     public function compress($imageLocation)
     {
@@ -103,7 +104,7 @@ class SmushIt
     /**
      * Compress a remote image using the Smush.it web service.
      *
-     * @return object
+     * @return \stdClass
      */
     private function smushUrl()
     {
@@ -117,7 +118,7 @@ class SmushIt
      * Compress a local image using the Smush.it web service.
      *
      * @throws SmushItException
-     * @return object
+     * @return \stdClass
      */
     private function smushFile()
     {
@@ -141,13 +142,13 @@ class SmushIt
      * @param  string $jsonStr A JSON string response from the Smush.it web service.
      *
      * @throws SmushItException
-     * @return object
+     * @return \stdClass
      */
     private function parseResponse($jsonStr)
     {
         $result = json_decode($jsonStr);
 
-        if (is_null($result)) {
+        if (null === $result) {
             throw new SmushItException('Bad response received from the Smush.it service.', 500, $this->imageLocation);
         }
 

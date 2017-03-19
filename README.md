@@ -5,48 +5,43 @@ SmushIt is a PHP client for the popular Yahoo! image compression web service [Sm
 
 Basic Usage
 -----------
-
-	// Require the SmushIt source file
-	require_once 'smushit.php';
-
-	// Initialise the Smushit client
-	$smushit = new SmushIt();
-
-	// Compress remote image and return result object
-	$remote_result = $smushit->compress('http://www.example.com/some/path/to/an/image.jpg');
-	print_r($remote_result);
-	//	stdClass Object
-	//	(
-	//		[src] => http://www.example.com/some/path/to/an/image.jpg
-	//		[src_size] => 22957
-	//		[dest] => http://smushit.zenfs.com/results/50c57e58/smush/image.jpg
-	//		[dest_size] => 22519
-	//		[percent] => 1.91
-	//	)
-
-	// Compress local image and return result object
-	$local_result = $smushit->compress('/some/path/to/an/image.jpg');
-	print_r($local_result);
-	//	stdClass Object
-	//	(
-	//		[src] => image.jpg
-	//		[src_size] => 22957
-	//		[dest] => http://smushit.zenfs.com/results/50c57e58/smush/image.jpg
-	//		[dest_size] => 22519
-	//		[percent] => 1.91
-	//	)
-
-
+    
+    use DavGothic\SmushIt\SmushIt;
+    
+    include __DIR__ . '/vendor/autoload.php';
+    
+    $smushit = new SmushIt();
+    
+    // Compress a local/remote image and return the result object.
+    $result = $smushit->compress('some/path/to/an/image.png');
+    print_r($result);
+    
+    // stdClass Object
+    // (
+    //     [src] => http://static0.resmush.it/output/1262dc777d8b239cfdf5f528a4032f02/source.png
+    //     [dest] => http://static1.resmush.it/output/a9ba82e7ba18e9482e085fadb126edad/output.png
+    //     [src_size] => 455200
+    //     [dest_size] => 158075
+    //     [percent] => 65
+    //     [format] => png
+    //     [expires] => Sun, 19 Mar 2017 18:00:33 +0100
+    //     [generator] => reSmush.it rev.1.4.22.20170224
+    // )
 
 Requirements
 ------------
 
- - PHP 5.2+
+ - PHP 5.5.0+
  - PHP JSON extension
  - PHP cURL extension
 
 Changelog
 ---------
+
+- 2.0.0
+  - Updated coding standards to follow PSR1/2
+  - Refactored to make use of PSR4 autoloading
+  - Increased required PHP version to 5.5.0
 
 - 1.1
   - Added request throttling (Thanks [Elan Ruusamäe](https://github.com/glensc))
@@ -57,4 +52,4 @@ Changelog
 License
 -------
 
-SmushIt is free and licensed under the [MIT license](http://davgothic.com/mit-license/)
+MIT
