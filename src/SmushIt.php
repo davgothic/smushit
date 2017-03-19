@@ -122,7 +122,7 @@ class SmushIt
     private function smushFile()
     {
         if ( ! is_file($this->imageLocation) || ! is_readable($this->imageLocation)) {
-            throw new SmushItException('Could not read image file', $this->imageLocation);
+            throw new SmushItException('Could not read image file', 500, $this->imageLocation);
         }
 
         curl_setopt($this->curl, CURLOPT_URL, self::SMUSH_URL);
@@ -146,11 +146,11 @@ class SmushIt
         $result = json_decode($jsonStr);
 
         if (is_null($result)) {
-            throw new SmushItException('Bad response received from the Smush.it service.', $this->imageLocation);
+            throw new SmushItException('Bad response received from the Smush.it service.', 500, $this->imageLocation);
         }
 
         if (isset($result->error)) {
-            throw new SmushItException($result->error, $this->imageLocation);
+            throw new SmushItException($result->error_long, $result->error, $this->imageLocation);
         }
 
         return $result;

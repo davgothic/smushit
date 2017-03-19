@@ -19,10 +19,10 @@ class SmushItException extends \Exception
      * @param string $message Error message.
      * @param string $image   Location of the image.
      */
-    public function __construct($message, $image)
+    public function __construct($message, $code, $image)
     {
         $this->image = $image;
-        parent::__construct($message);
+        parent::__construct($message, $code);
     }
 
     /**
