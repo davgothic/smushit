@@ -17,7 +17,8 @@ class SmushItException extends \Exception
      * Creates a new exception.
      *
      * @param string $message Error message.
-     * @param string $image   Location of the image.
+     * @param int $code The exception code.
+     * @param string $image Location of the image.
      */
     public function __construct($message, $code, $image)
     {
