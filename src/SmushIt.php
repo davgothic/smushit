@@ -2,6 +2,8 @@
 
 namespace DavGothic\SmushIt;
 
+use DavGothic\SmushIt\Client\Client;
+use DavGothic\SmushIt\Client\ClientInterface;
 use DavGothic\SmushIt\Exception\SmushItException;
 
 /**
@@ -29,9 +31,9 @@ class SmushIt
     private $imageLocation;
 
     /**
-     * @var resource The cURL handle.
+     * @var ClientInterface The client object.
      */
-    private $curl;
+    private $client;
 
     /**
      * @var int Time of last request.
@@ -46,10 +48,13 @@ class SmushIt
     /**
      * Create a new SmushIt instance.
      *
+     * @param ClientInterface $client The client to use for the request.
+     *
      * @throws \RuntimeException
      */
-    public function __construct()
+    public function __construct(ClientInterface $client)
     {
+    	// @codeCoverageIgnoreStart
         if ( ! extension_loaded('json')) {
             throw new \RuntimeException('The JSON extension was not found.');
         }
@@ -57,16 +62,15 @@ class SmushIt
         if ( ! extension_loaded('curl')) {
             throw new \RuntimeException('The cURL extension was not found.');
         }
+        // @codeCoverageIgnoreEnd
 
-        $this->curl = curl_init();
-        curl_setopt($this->curl, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($this->curl, CURLOPT_CONNECTTIMEOUT, 5);
-        curl_setopt($this->curl, CURLOPT_USERAGENT, self::USER_AGENT);
+        $this->client = $client;
     }
 
     /**
      * @param string $imageLocation The location of the image.
      *
+     * @throws \DavGothic\SmushIt\Exception\SmushItException
      * @return \stdClass
      *
      *  src       = Source location of the input image.
@@ -79,6 +83,7 @@ class SmushIt
     public function compress($imageLocation)
     {
         // Check if we should throttle the request to once per $requestInterval
+	    // @codeCoverageIgnoreStart
         if ( ! empty($this->requestTime)) {
             $sinceLast = ((microtime(true) - $this->requestTime) * 1000000);
 
@@ -87,10 +92,15 @@ class SmushIt
                 usleep($this->requestInterval - $sinceLast);
             }
         }
+	    // @codeCoverageIgnoreEnd
 
         $this->requestTime = microtime(true);
 
         $this->imageLocation = $imageLocation;
+
+        if (null === $this->client->getUserAgent()) {
+            $this->client->setUserAgent(self::USER_AGENT);
+        }
 
         if (preg_match('/https?:\/\//', $this->imageLocation) === 1) {
             $result = $this->smushUrl();
@@ -104,12 +114,12 @@ class SmushIt
     /**
      * Compress a remote image using the Smush.it web service.
      *
+     * @throws \DavGothic\SmushIt\Exception\SmushItException
      * @return \stdClass
      */
     private function smushUrl()
     {
-        curl_setopt($this->curl, CURLOPT_URL, self::SMUSH_URL . http_build_query(array('img' => $this->imageLocation)));
-        $jsonStr = curl_exec($this->curl);
+        $jsonStr = $this->client->execute(Client::TYPE_REMOTE, $this->imageLocation);
 
         return $this->parseResponse($jsonStr);
     }
@@ -126,12 +136,7 @@ class SmushIt
             throw new SmushItException('Could not read image file', 500, $this->imageLocation);
         }
 
-        $file = new \CURLFile($this->imageLocation);
-
-        curl_setopt($this->curl, CURLOPT_URL, self::SMUSH_URL);
-        curl_setopt($this->curl, CURLOPT_POST, true);
-        curl_setopt($this->curl, CURLOPT_POSTFIELDS, array('files' => $file));
-        $jsonStr = curl_exec($this->curl);
+        $jsonStr = $this->client->execute(Client::TYPE_LOCAL, $this->imageLocation);
 
         return $this->parseResponse($jsonStr);
     }
