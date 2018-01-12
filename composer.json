@@ -14,6 +14,12 @@
   "require": {
     "php": ">=5.5.0"
   },
+  "require-dev": {
+    "guzzlehttp/guzzle": "^6.0"
+  },
+  "suggest": {
+    "guzzlehttp/guzzle": "Required for using Guzzle client"
+  },
   "autoload": {
     "psr-4": {
       "DavGothic\\SmushIt\\": "src/"
