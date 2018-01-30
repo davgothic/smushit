@@ -6,12 +6,13 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 ### Added
-- Added client interface to allow custom client implementations
-- Added Guzzle HTTP client implementation
+- Client interface to allow custom client implementations
+- Guzzle HTTP client implementation
+- Unit tests
 
 ### Changed
-- Refactor cURL client implementation out of the SmushIt class
-- Extract cURL PHP extension check out of SmushIt class and into cURL client
+- Moved cURL client implementation out of the SmushIt class
+- Moved cURL PHP extension check out of SmushIt class and into cURL client
 
 ## [2.0.1] - 2018-01-30
 ### Added
