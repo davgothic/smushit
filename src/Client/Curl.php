@@ -11,8 +11,20 @@ use DavGothic\SmushIt\SmushIt;
  */
 class Curl extends Client
 {
+	/**
+	 * Curl constructor.
+	 *
+	 * @throws \RuntimeException If the cURL PHP extension is not loaded.
+	 */
+	public function __construct() {
+		// @codeCoverageIgnoreStart
+		if ( ! extension_loaded('curl')) {
+			throw new \RuntimeException('The cURL PHP extension was not found.');
+		}
+		// @codeCoverageIgnoreEnd
+	}
 
-    /**
+	/**
      * @inheritdoc
      */
     public function execute($requestType, $imageLocation)

@@ -58,10 +58,6 @@ class SmushIt
         if ( ! extension_loaded('json')) {
             throw new \RuntimeException('The JSON extension was not found.');
         }
-
-        if ( ! extension_loaded('curl')) {
-            throw new \RuntimeException('The cURL extension was not found.');
-        }
         // @codeCoverageIgnoreEnd
 
         $this->client = $client;

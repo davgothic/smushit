@@ -5,6 +5,13 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+### Added
+- Added client interface to allow custom client implementations
+- Added Guzzle HTTP client implementation
+
+### Changed
+- Refactor cURL client implementation out of the SmushIt class
+- Extract cURL PHP extension check out of SmushIt class and into cURL client
 
 ## [2.0.1] - 2018-01-30
 ### Added
