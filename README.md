@@ -7,11 +7,13 @@ Basic Usage
 -----------
 
 ```php
+use DavGothic\SmushIt\Client;
 use DavGothic\SmushIt\SmushIt;
 
 include __DIR__ . '/vendor/autoload.php';
 
-$smushit = new SmushIt();
+$client = new Client\Curl();
+$smushit = new SmushIt($client);
 
 // Compress a local/remote image and return the result object.
 $result = $smushit->compress('some/path/to/an/image.png');
@@ -44,4 +46,4 @@ Requirements
 
  - PHP 5.5.0+
  - PHP JSON extension
- - PHP cURL extension
+ - PHP cURL extension (This requirement can be ignored if using any client other than the provided cURL client)
