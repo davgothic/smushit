@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Client interface to allow custom client implementations
 - Guzzle HTTP client implementation
 - Unit tests
+- Travis-CI integration
 
 ### Changed
 - Moved cURL client implementation out of the SmushIt class
