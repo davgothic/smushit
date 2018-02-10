@@ -1,6 +1,11 @@
 SmushIt
 ==========
 
+[![Version](https://img.shields.io/packagist/v/davgothic/smushit.svg)]()
+[![Build Status](https://img.shields.io/travis/davgothic/smushit.svg)]()
+[![Downloads](https://img.shields.io/packagist/dt/davgothic/smushit.svg)]()
+[![License](https://img.shields.io/github/license/davgothic/smushit.svg)]()
+
 SmushIt is a PHP client for the popular Yahoo! image compression web service [Smush.it](http://www.smushit.com/ysmush.it/)
 
 Basic Usage
