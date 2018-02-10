@@ -1,10 +1,10 @@
 SmushIt
 ==========
 
-[![Version](https://img.shields.io/packagist/v/davgothic/smushit.svg)]()
-[![Build Status](https://img.shields.io/travis/davgothic/smushit.svg)]()
-[![Downloads](https://img.shields.io/packagist/dt/davgothic/smushit.svg)]()
-[![License](https://img.shields.io/github/license/davgothic/smushit.svg)]()
+[![Version](https://img.shields.io/packagist/v/davgothic/smushit.svg)](https://packagist.org/packages/davgothic/smushit)
+[![Build Status](https://img.shields.io/travis/davgothic/smushit.svg)](https://travis-ci.org/davgothic/smushit)
+[![Downloads](https://img.shields.io/packagist/dt/davgothic/smushit.svg)](https://packagist.org/packages/davgothic/smushit)
+[![License](https://img.shields.io/github/license/davgothic/smushit.svg)](https://github.com/davgothic/smushit/blob/master/LICENSE.md)
 
 SmushIt is a PHP client for the popular Yahoo! image compression web service [Smush.it](http://www.smushit.com/ysmush.it/)
 
