@@ -9,7 +9,7 @@ use DavGothic\SmushIt\Exception\SmushItException;
 /**
  * SmushIt - A PHP client for the Yahoo! Smush.it web service.
  *
- * @version    3.0.0
+ * @version    3.0.1
  * @author     David Hancock <davgothic@gmail.com>
  * @author     Elan Ruusamäe <glen@delfi.ee>
  * @copyright  (c) 2011 David Hancock
@@ -23,7 +23,7 @@ class SmushIt
     const SMUSH_URL = 'http://api.resmush.it/ws.php?';
 
     // User agent string to set for the request.
-    const USER_AGENT = 'ShushIt PHP Client/3.0.0 (+http://github.com/davgothic/SmushIt)';
+    const USER_AGENT = 'ShushIt PHP Client/3.0.1 (+http://github.com/davgothic/SmushIt)';
     /**
      * @var int How often it is allowed to send requests. In microseconds.
      */
