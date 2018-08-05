@@ -5,6 +5,9 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+### Changed
+- Tidied up code style
+- Added ext-json to composer.json requirements in place of extension_loaded check
 
 ## [3.0.0] - 2018-02-10
 ### Added

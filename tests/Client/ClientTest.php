@@ -10,29 +10,30 @@ use DavGothic\SmushIt\Client\Client;
 class ClientTest extends \PHPUnit\Framework\TestCase
 {
 
-	/**
-	 * @var Client The Client object.
-	 */
-	private $client;
+    /**
+     * @var Client The Client object.
+     */
+    private $client;
 
-	public function setUp()
-	{
-		$this->client = $this->getMockForAbstractClass(Client::class);
-	}
+    public function setUp()
+    {
+        $this->client = $this->getMockForAbstractClass(Client::class);
+    }
 
-	public function testSettingTimeout()
-	{
-		$timeout = 10;
-		$this->client->setTimeout($timeout);
+    public function testSettingTimeout()
+    {
+        $timeout = 10;
+        $this->client->setTimeout($timeout);
 
-		$this->assertEquals($timeout, $this->client->getTimeout());
-	}
+        $this->assertEquals($timeout, $this->client->getTimeout());
+    }
 
-	public function testSettingUserAgent()
-	{
-		$userAgent = 'Test User Agent';
-		$this->client->setUserAgent($userAgent);
+    public function testSettingUserAgent()
+    {
+        $userAgent = 'Test User Agent';
+        $this->client->setUserAgent($userAgent);
 
-		$this->assertEquals($userAgent, $this->client->getUserAgent());
-	}
+        $this->assertEquals($userAgent, $this->client->getUserAgent());
+    }
+
 }

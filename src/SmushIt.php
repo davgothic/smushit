@@ -24,26 +24,22 @@ class SmushIt
 
     // User agent string to set for the request.
     const USER_AGENT = 'ShushIt PHP Client/3.0.0 (+http://github.com/davgothic/SmushIt)';
-
-    /**
-     * @var string location of the image.
-     */
-    private $imageLocation;
-
-    /**
-     * @var ClientInterface The client object.
-     */
-    private $client;
-
-    /**
-     * @var int Time of last request.
-     */
-    private $requestTime;
-
     /**
      * @var int How often it is allowed to send requests. In microseconds.
      */
     public $requestInterval = 1000000;
+    /**
+     * @var string location of the image.
+     */
+    private $imageLocation;
+    /**
+     * @var ClientInterface The client object.
+     */
+    private $client;
+    /**
+     * @var int Time of last request.
+     */
+    private $requestTime;
 
     /**
      * Create a new SmushIt instance.
@@ -54,12 +50,6 @@ class SmushIt
      */
     public function __construct(ClientInterface $client)
     {
-    	// @codeCoverageIgnoreStart
-        if ( ! extension_loaded('json')) {
-            throw new \RuntimeException('The JSON extension was not found.');
-        }
-        // @codeCoverageIgnoreEnd
-
         $this->client = $client;
     }
 
@@ -79,8 +69,8 @@ class SmushIt
     public function compress($imageLocation)
     {
         // Check if we should throttle the request to once per $requestInterval
-	    // @codeCoverageIgnoreStart
-        if ( ! empty($this->requestTime)) {
+        // @codeCoverageIgnoreStart
+        if (!empty($this->requestTime)) {
             $sinceLast = ((microtime(true) - $this->requestTime) * 1000000);
 
             if ($sinceLast < $this->requestInterval) {
@@ -88,7 +78,7 @@ class SmushIt
                 usleep($this->requestInterval - $sinceLast);
             }
         }
-	    // @codeCoverageIgnoreEnd
+        // @codeCoverageIgnoreEnd
 
         $this->requestTime = microtime(true);
 
@@ -128,7 +118,7 @@ class SmushIt
      */
     private function smushFile()
     {
-        if ( ! is_file($this->imageLocation) || ! is_readable($this->imageLocation)) {
+        if (!is_file($this->imageLocation) || !is_readable($this->imageLocation)) {
             throw new SmushItException('Could not read image file', 500, $this->imageLocation);
         }
 

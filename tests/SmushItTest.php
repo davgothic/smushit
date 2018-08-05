@@ -1,7 +1,7 @@
 <?php
 
-use DavGothic\SmushIt\SmushIt;
 use DavGothic\SmushIt\Exception\SmushItException;
+use DavGothic\SmushIt\SmushIt;
 
 /**
  * Corresponding Class to test SmushIt class
@@ -18,16 +18,16 @@ class SmushItTest extends \PHPUnit\Framework\TestCase
 
     public function setUp()
     {
-        $responseArray = array(
-            'src' => 'http://static0.resmush.it/output/1262dc777d8b239cfdf5f528a4032f02/source.png',
-            'dest' => 'http://static1.resmush.it/output/a9ba82e7ba18e9482e085fadb126edad/output.png',
-            'src_size' => 455200,
+        $responseArray = [
+            'src'       => 'http://static0.resmush.it/output/1262dc777d8b239cfdf5f528a4032f02/source.png',
+            'dest'      => 'http://static1.resmush.it/output/a9ba82e7ba18e9482e085fadb126edad/output.png',
+            'src_size'  => 455200,
             'dest_size' => 158075,
-            'percent' => 65,
-            'format' => 'png',
-            'expires' => 'Sun, 19 Mar 2017 18:00:33 +0100',
+            'percent'   => 65,
+            'format'    => 'png',
+            'expires'   => 'Sun, 19 Mar 2017 18:00:33 +0100',
             'generator' => 'reSmush.it rev.1.4.22.20170224',
-        );
+        ];
 
         $client = $this->getMock(\DavGothic\SmushIt\Client\ClientInterface::class);
 
@@ -62,13 +62,13 @@ class SmushItTest extends \PHPUnit\Framework\TestCase
     public function testIfExceptionThrownOnEmptyResponse()
     {
         $this->setExpectedException(SmushItException::class);
-        $this->invokeMethod($this->smushIt, 'parseResponse', array(null));
+        $this->invokeMethod($this->smushIt, 'parseResponse', [null]);
     }
 
     public function testIfExceptionThrownOnErrorResponse()
     {
         $this->setExpectedException(SmushItException::class);
-        $this->invokeMethod($this->smushIt, 'parseResponse', array('{"error":400,"error_long":"message"}'));
+        $this->invokeMethod($this->smushIt, 'parseResponse', ['{"error":400,"error_long":"message"}']);
     }
 
     /**
@@ -80,7 +80,7 @@ class SmushItTest extends \PHPUnit\Framework\TestCase
      *
      * @return mixed Method return.
      */
-    public function invokeMethod(&$object, $methodName, array $parameters = array())
+    public function invokeMethod(&$object, $methodName, array $parameters = [])
     {
         $reflection = new \ReflectionClass(get_class($object));
         $method     = $reflection->getMethod($methodName);

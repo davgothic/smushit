@@ -11,20 +11,21 @@ use DavGothic\SmushIt\SmushIt;
  */
 class Curl extends Client
 {
-	/**
-	 * Curl constructor.
-	 *
-	 * @throws \RuntimeException If the cURL PHP extension is not loaded.
-	 */
-	public function __construct() {
-		// @codeCoverageIgnoreStart
-		if ( ! extension_loaded('curl')) {
-			throw new \RuntimeException('The cURL PHP extension was not found.');
-		}
-		// @codeCoverageIgnoreEnd
-	}
+    /**
+     * Curl constructor.
+     *
+     * @throws \RuntimeException If the cURL PHP extension is not loaded.
+     */
+    public function __construct()
+    {
+        // @codeCoverageIgnoreStart
+        if (!extension_loaded('curl')) {
+            throw new \RuntimeException('The cURL PHP extension was not found.');
+        }
+        // @codeCoverageIgnoreEnd
+    }
 
-	/**
+    /**
      * @inheritdoc
      */
     public function execute($requestType, $imageLocation)
@@ -37,11 +38,11 @@ class Curl extends Client
         if (self::TYPE_LOCAL === $requestType) {
             curl_setopt($curl, CURLOPT_URL, SmushIt::SMUSH_URL);
             curl_setopt($curl, CURLOPT_POST, true);
-            curl_setopt($curl, CURLOPT_POSTFIELDS, array('files' => new \CURLFile($imageLocation)));
+            curl_setopt($curl, CURLOPT_POSTFIELDS, ['files' => new \CURLFile($imageLocation)]);
         } else {
-            curl_setopt($curl, CURLOPT_URL, SmushIt::SMUSH_URL . http_build_query(array(
-                    'img' => $imageLocation
-                )));
+            curl_setopt($curl, CURLOPT_URL, SmushIt::SMUSH_URL . http_build_query([
+                    'img' => $imageLocation,
+                ]));
         }
 
         return curl_exec($curl);

@@ -5,7 +5,7 @@ namespace DavGothic\SmushIt\Client;
 abstract class Client implements ClientInterface
 {
 
-    const TYPE_LOCAL = 0;
+    const TYPE_LOCAL  = 0;
     const TYPE_REMOTE = 1;
 
     /**
@@ -37,17 +37,17 @@ abstract class Client implements ClientInterface
     /**
      * @inheritdoc
      */
-    public function setUserAgent($userAgent)
+    public function getUserAgent()
     {
-        $this->userAgent = $userAgent;
+        return $this->userAgent;
     }
 
     /**
      * @inheritdoc
      */
-    public function getUserAgent()
+    public function setUserAgent($userAgent)
     {
-        return $this->userAgent;
+        $this->userAgent = $userAgent;
     }
 
 }
